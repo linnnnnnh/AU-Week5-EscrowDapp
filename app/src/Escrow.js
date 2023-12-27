@@ -1,3 +1,7 @@
+import { ethers } from 'ethers';
+import BigNumber from 'bignumber.js';
+
+
 export default function Escrow({
   address,
   arbiter,
@@ -5,6 +9,14 @@ export default function Escrow({
   value,
   handleApprove,
 }) {
+
+  // Convert the value from Wei to Ether
+  const valueInEther = ethers.utils.formatUnits(value, 'ether');
+
+  // Format the value for better readability
+  const formattedValue = new BigNumber(valueInEther).toFormat();
+
+
   return (
     <div className="existing-contract">
       <ul className="fields">
@@ -18,7 +30,7 @@ export default function Escrow({
         </li>
         <li>
           <div> Value </div>
-          <div> {value} </div>
+          <div> {formattedValue} ETH </div>
         </li>
         <div
           className="button"
